@@ -24,51 +24,35 @@ function InputData({ onAddSong }) {
   };
 
   const handleAddSong = () => {
-    if (
-      newSong.title &&
-      newSong.albumType &&
-      newSong.avatar &&
-      newSong.media &&
-      newSong.column &&
-      newSong.category &&
-      newSong.duration &&
-      newSong.artist1 &&
-      newSong.artist2 &&
-      newSong.artist3
-    ) {
-      // Gửi thông tin bài hát lên máy chủ.
-      fetch("http://localhost:3000/newreleaseall", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newSong), // Chuyển đổi thành JSON trước khi gửi lên.
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          // Nếu thành công, response sẽ chứa danh sách bài hát đã được cập nhật.
-          onAddSong(response);
-          // Đặt lại trạng thái newSong để chuẩn bị cho việc thêm bài hát tiếp theo.
-          setNewSong({
-            title: "",
-            author1: "",
-            author2: "",
-            author3: "",
-            albumType: "",
-            duration: "",
-            category: "",
-            avatar: "",
-            media: "",
-            column: "",
-          });
-        })
-        .catch((error) => {
-          console.error("Lỗi khi thêm bài hát:", error);
+    // Gửi thông tin bài hát lên máy chủ.
+    fetch("http://localhost:3000/newreleaseall", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newSong), // Chuyển đổi thành JSON trước khi gửi lên.
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // Nếu thành công, response sẽ chứa danh sách bài hát đã được cập nhật.
+        onAddSong(response);
+        // Đặt lại trạng thái newSong để chuẩn bị cho việc thêm bài hát tiếp theo.
+        setNewSong({
+          title: "",
+          artist1: "",
+          artist2: "",
+          artist3: "",
+          albumType: "",
+          duration: "",
+          category: "",
+          avatar: "",
+          media: "",
+          column: "",
         });
-    } else {
-      // Hiển thị thông báo hoặc xử lý khi người dùng không điền đầy đủ thông tin.
-      return;
-    }
+      })
+      .catch((error) => {
+        console.error("Lỗi khi thêm bài hát:", error);
+      });
   };
   // useEffect(() => {
   //   console.log(value);

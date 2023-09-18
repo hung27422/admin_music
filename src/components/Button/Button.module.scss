@@ -1,0 +1,23 @@
+.wrapper {
+  + .wrapper {
+    margin-left: 4px;
+  }
+}
+.remove {
+  width: 70px;
+  height: 35px;
+  background-color: red;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.update {
+  width: 70px;
+  height: 35px;
+  background-color: green;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.title{
+    font-size: 1.6rem;
+    color: var(--white);
+}
